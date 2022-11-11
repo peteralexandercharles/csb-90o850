@@ -39,11 +39,10 @@
 
         <body>
           <p>
-            You can execute any Python code. Just enter something in the box
-            below and click the button.
+            Calculadora.
           </p>
           <input id="code" value="" />
-          <button onclick="evaluatePython()">Run</button>
+          <button class="btn btn-success" onclick="evaluatePython()">Resposta</button>
           <br />
           <br />
           <div>Output:</div>
@@ -57,16 +56,20 @@
           <script>
             const output = document.getElementById('output');
             const code = document.getElementById('code');
+            const codestr = document.getElementById('codestr');
+            
+          
 
             function addToOutput(s) {
-              output.value += '>>>' + code.value + '\n' + s + '\n';
+              output.value += '😀' + '\t' + code.value + '\n' + s + '\n';
+              output.value == "Qual o horário de fucionamento?";
             }
 
-            output.value = 'Initializing...\n';
+            output.value = 'Inicializando...\n';
             // init Pyodide
             async function main() {
               let pyodide = await loadPyodide();
-              output.value += 'Ready!\n';
+              output.value += 'Pronto!\tEm que posso te ajudar?\n';
               return pyodide;
             }
             let pyodideReadyPromise = main();
@@ -75,9 +78,9 @@
               let pyodide = await pyodideReadyPromise;
               try {
                 let output = pyodide.runPython(code.value);
-                addToOutput(output);
+                addToOutput("resultado é " + "igual" + "\t" + output);
               } catch (err) {
-                addToOutput(err);
+                pass;
               }
             }
           </script>
